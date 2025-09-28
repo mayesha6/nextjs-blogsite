@@ -36,7 +36,8 @@ export function AuthForm({ type }: AuthFormProps) {
   }
 
   return (
-    <Card className="w-[400px] mx-auto mt-20 shadow-lg">
+    <div className="w-full h-dvh flex justify-center items-center">
+        <Card className="w-[400px] shadow-lg">
       <CardHeader>
         <CardTitle className="text-center">
           {type === "login" ? "Login" : "Register"}
@@ -47,7 +48,7 @@ export function AuthForm({ type }: AuthFormProps) {
           {type === "register" && (
             <>
               <div>
-                <Label htmlFor="name">Name</Label>
+                <Label htmlFor="name" className="pb-2">Name</Label>
                 <Input
                   id="name"
                   type="text"
@@ -58,7 +59,7 @@ export function AuthForm({ type }: AuthFormProps) {
                 />
               </div>
               <div>
-                <Label htmlFor="phone">Phone</Label>
+                <Label htmlFor="phone" className="pb-2">Phone</Label>
                 <Input
                   id="phone"
                   type="tel"
@@ -71,7 +72,7 @@ export function AuthForm({ type }: AuthFormProps) {
             </>
           )}
           <div>
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email" className="pb-2">Email</Label>
             <Input
               id="email"
               type="email"
@@ -82,7 +83,7 @@ export function AuthForm({ type }: AuthFormProps) {
             />
           </div>
           <div>
-            <Label htmlFor="password">Password</Label>
+            <Label htmlFor="password" className="pb-2">Password</Label>
             <Input
               id="password"
               type="password"
@@ -97,33 +98,39 @@ export function AuthForm({ type }: AuthFormProps) {
           </Button>
         </form>
 
-        {/* Divider */}
-        <div className="flex items-center my-4">
-          <div className="flex-1 h-px bg-gray-300"></div>
-          <span className="px-2 text-sm text-gray-500">OR</span>
-          <div className="flex-1 h-px bg-gray-300"></div>
-        </div>
+        {/* Only show social login in login page */}
+        {type === "login" && (
+          <>
+            {/* Divider */}
+            <div className="flex items-center my-4">
+              <div className="flex-1 h-px bg-gray-300"></div>
+              <span className="px-2 text-sm text-gray-500">OR</span>
+              <div className="flex-1 h-px bg-gray-300"></div>
+            </div>
 
-        {/* Social Login Buttons */}
-        <div className="space-y-2">
-          <Button
-            onClick={handleGoogleLogin}
-            variant="outline"
-            className="w-full flex items-center gap-2"
-          >
-            <Mail className="h-4 w-4" />
-            Login with Google
-          </Button>
-          <Button
-            onClick={handleGithubLogin}
-            variant="outline"
-            className="w-full flex items-center gap-2"
-          >
-            <Github className="h-4 w-4" />
-            Login with GitHub
-          </Button>
-        </div>
+            {/* Social Login Buttons */}
+            <div className="space-y-2">
+              <Button
+                onClick={handleGoogleLogin}
+                variant="outline"
+                className="w-full flex items-center gap-2"
+              >
+                <Mail className="h-4 w-4" />
+                Login with Google
+              </Button>
+              <Button
+                onClick={handleGithubLogin}
+                variant="outline"
+                className="w-full flex items-center gap-2"
+              >
+                <Github className="h-4 w-4" />
+                Login with GitHub
+              </Button>
+            </div>
+          </>
+        )}
       </CardContent>
     </Card>
+    </div>
   )
 }

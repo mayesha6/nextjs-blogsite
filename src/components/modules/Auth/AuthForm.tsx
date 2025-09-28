@@ -1,0 +1,129 @@
+"use client"
+
+import * as React from "react"
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { Button } from "@/components/ui/button"
+import { Github, Mail } from "lucide-react"
+
+interface AuthFormProps {
+  type: "login" | "register"
+}
+
+export function AuthForm({ type }: AuthFormProps) {
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [name, setName] = useState("")
+  const [phone, setPhone] = useState("")
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (type === "login") {
+      console.log("Login:", { email, password })
+    } else {
+      console.log("Register:", { name, phone, email, password })
+    }
+  }
+
+  const handleGoogleLogin = () => {
+    console.log("Login with Google")
+  }
+
+  const handleGithubLogin = () => {
+    console.log("Login with GitHub")
+  }
+
+  return (
+    <Card className="w-[400px] mx-auto mt-20 shadow-lg">
+      <CardHeader>
+        <CardTitle className="text-center">
+          {type === "login" ? "Login" : "Register"}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {type === "register" && (
+            <>
+              <div>
+                <Label htmlFor="name">Name</Label>
+                <Input
+                  id="name"
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Your Name"
+                  required
+                />
+              </div>
+              <div>
+                <Label htmlFor="phone">Phone</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={phone}
+                  onChange={(e) => setPhone(e.target.value)}
+                  placeholder="+880123456789"
+                  required
+                />
+              </div>
+            </>
+          )}
+          <div>
+            <Label htmlFor="email">Email</Label>
+            <Input
+              id="email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              required
+            />
+          </div>
+          <div>
+            <Label htmlFor="password">Password</Label>
+            <Input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="********"
+              required
+            />
+          </div>
+          <Button type="submit" className="w-full">
+            {type === "login" ? "Login" : "Register"}
+          </Button>
+        </form>
+
+        {/* Divider */}
+        <div className="flex items-center my-4">
+          <div className="flex-1 h-px bg-gray-300"></div>
+          <span className="px-2 text-sm text-gray-500">OR</span>
+          <div className="flex-1 h-px bg-gray-300"></div>
+        </div>
+
+        {/* Social Login Buttons */}
+        <div className="space-y-2">
+          <Button
+            onClick={handleGoogleLogin}
+            variant="outline"
+            className="w-full flex items-center gap-2"
+          >
+            <Mail className="h-4 w-4" />
+            Login with Google
+          </Button>
+          <Button
+            onClick={handleGithubLogin}
+            variant="outline"
+            className="w-full flex items-center gap-2"
+          >
+            <Github className="h-4 w-4" />
+            Login with GitHub
+          </Button>
+        </div>
+      </CardContent>
+    </Card>
+  )
+}

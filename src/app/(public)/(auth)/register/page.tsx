@@ -1,12 +1,13 @@
-import { AuthForm } from '@/components/modules/Auth/AuthForm';
+
+import RegisterForm from '@/components/modules/Auth/RegisterForm';
 import React from 'react';
 
-const RegisterForm = () => {
+const Register = () => {
     return (
         <div>
-            <AuthForm type="register"/>
+            <RegisterForm />
         </div>
     );
 };
 
-export default RegisterForm;
+export default Register;

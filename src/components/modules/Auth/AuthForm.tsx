@@ -8,6 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Github, Mail } from "lucide-react";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
 
 interface AuthFormProps {
   type: "login" | "register";
@@ -30,6 +31,9 @@ export function AuthForm({ type }: AuthFormProps) {
 
   const handleGoogleLogin = () => {
     console.log("Login with Google");
+    signIn("google", {
+      callbackUrl:"/dashboard"
+    })
   };
 
   const handleGithubLogin = () => {
@@ -102,7 +106,7 @@ export function AuthForm({ type }: AuthFormProps) {
                 required
               />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full cursor-pointer">
               {type === "login" ? "Login" : "Register"}
             </Button>
           </form>
@@ -124,7 +128,7 @@ export function AuthForm({ type }: AuthFormProps) {
                 <Button
                   onClick={handleGoogleLogin}
                   variant="outline"
-                  className="w-full flex items-center gap-2"
+                  className="w-full flex items-center gap-2 cursor-pointer"
                 >
                   <Mail className="h-4 w-4" />
                   Login with Google
@@ -132,7 +136,7 @@ export function AuthForm({ type }: AuthFormProps) {
                 <Button
                   onClick={handleGithubLogin}
                   variant="outline"
-                  className="w-full flex items-center gap-2"
+                  className="w-full flex items-center gap-2 cursor-pointer"
                 >
                   <Github className="h-4 w-4" />
                   Login with GitHub
